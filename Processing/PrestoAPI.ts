@@ -583,5 +583,109 @@ export class PrestoAPI {
     }
 }
 
+// es kotem daamata radgan dataBase.js idan miwevda gamodzaxeba
+//#region Restaurant
+const FoodCategories = [
+    //Asian, Breakfast, Fast food, Chicken, Desserts, Fish, Healthy, Diet, Hot-dog, Mexican, Indian, European, Italian, Japanese, Alcohol, Soup, Sweets
+    {
+      MainImage:
+        "https://www.aucklandairport.co.nz/-/media/Images/Traveller/Retail/Eat-and-Relax/Restaurant-main-images/McDonalds5.ashx",
+      Type: "Fast Food",
+    },
+    {
+      MainImage:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Khinkali_551.jpg/1200px-Khinkali_551.jpg",
+      Type: "Georgian Cuisine",
+    },
+    {
+      MainImage:
+        "https://bridgecafecheltenham.co.uk/wp-content/uploads/2019/05/coffee.jpg",
+      Type: "Cafe",
+    },
+    {
+      MainImage:
+        "https://www.wapititravel.com/blog/wp-content/uploads/2020/01/sashimi__healthy_japan_food.jpg",
+      Type: "Asian",
+    },
+    {
+      MainImage:
+        "https://d.newsweek.com/en/full/1312719/breakfast-food-pancakes-stock-getty.jpg",
+      Type: "Breakfast",
+    },
+    {
+      MainImage:
+        "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/bnyisqli4tyobvs3iikb",
+      Type: "Pizza",
+    },
+    {
+      MainImage:
+        "https://wallsdesk.com/wp-content/uploads/2016/11/Fried-Chicken-for-desktop.jpg",
+      Type: "Chicken",
+    },
+    {
+      MainImage:
+        "https://i1.wp.com/culinarylore.com/wp-content/uploads/2018/05/chocolate-cake-dessert.jpg?resize=480%2C316&ssl=1",
+      Type: "Desserts",
+    },
+    {
+      MainImage:
+        "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/91b1a584826873.5d6906eb2a3d5.jpg",
+      Type: "Fish",
+    },
+    {
+      MainImage:
+        "http://physicalsolutionsli.com/wp-content/uploads/2020/02/heart-diet-1024x680.jpg",
+      Type: "Healthy",
+    },
+    {
+      MainImage:
+        "https://www.drweil.com/wp-content/uploads/2019/02/Macrobiotic-Diet-2-938448852.jpg",
+      Type: "Diet",
+    },
+    {
+      MainImage:
+        "https://trueactivist.com/wp-content/uploads/2015/07/hotdog2.jpg",
+      Type: "Hot dog",
+    },
+    {
+      MainImage:
+        "http://3.bp.blogspot.com/-YnIC50Thwjo/UVGXaV9pIbI/AAAAAAAAg7w/1gSgAj0G7_s/s1600/Mexican+Food+-+Resize.jpg",
+      Type: "Mexican",
+    },
+    {
+      MainImage:
+        "https://www.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2015/03/04/Interactivity/Images/iStock_000050497740_Full.jpg?t=20170517",
+      Type: "Indian",
+    },
+    {
+      MainImage:
+        "https://www.aspirantsg.com/wp-content/uploads/2016/09/Wiener-Schnitzel-AspirantSG.jpg",
+      Type: "European",
+    },
+    {
+      MainImage:
+        "https://i.huffpost.com/gen/964952/images/o-ITALIAN-FOOD-SURVEY-facebook.jpg",
+      Type: "Italian",
+    },
+    {
+      MainImage:
+        "https://www.zastavki.com/pictures/1600x1200/2009/Food_Seafood_Japanese_Cuisine_Sushi_012022_.jpg",
+      Type: "Japanese",
+    },
+    {
+      MainImage:
+        "https://cff2.earth.com/uploads/2019/04/03121800/Alcohol-induced-brain-damage-continues-even-after-quitting-drinking.jpg",
+      Type: "Alcohol",
+    },
+   
+  ];
+/**
+ * Gets all categories. In the future, it'll get data from the server time to time.
+ * @returns {[{MainImage: string, Type: string},{MainImage: string, Type: string},{MainImage: string, Type: string},{MainImage: string, Type: string},{MainImage: string, Type: string},null,null,null,null,null,null,null,null,null,null,null,null,null,null]}
+ */
+export const getCategoriesList = () => {
+    return FoodCategories;
+  };
+
 // Usage
 export const API = new PrestoAPI('https://api.prestoreserve.ge');

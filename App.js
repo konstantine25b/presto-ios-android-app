@@ -4,6 +4,7 @@ import LogIn from "./Components/Authentication/LogIn";
 import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { store } from "./Components/store";
+import Home from "./Components/Pages/Home";
 
 
 
@@ -20,6 +21,11 @@ export default function App() {
               name="Log In"
               component={LogIn}
               options={{ headerShown: false }}
+            />
+             <Stack.Screen
+              name="Home"
+              component={Home}
+              
             />
           
         </Stack.Navigator>
