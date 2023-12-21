@@ -1,5 +1,12 @@
 import React from "react";
-import { View, ScrollView, Text, Image, Pressable, FlatList } from "react-native";
+import {
+  View,
+  ScrollView,
+  Text,
+  Image,
+  Pressable,
+  FlatList,
+} from "react-native";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 
 import { useNavigation } from "@react-navigation/native";
@@ -7,14 +14,11 @@ import { useNavigation } from "@react-navigation/native";
 import COLORS from "../../Styles/colors";
 import CategoriesRowCard from "./CategoriesRowCard";
 
-
-
 // ess aris homepageze roa categories restaurantis cardebis mwkrivi
-
 
 function FuturedRows({ title, description, props }) {
   const navigation = useNavigation(); // am hookit chven onpressze gadavyavart titoeul restoranis pageze
-  
+
   return (
     <View>
       <View
@@ -36,22 +40,27 @@ function FuturedRows({ title, description, props }) {
           {title}
         </Text>
         <Pressable
-        style={{
-          flexDirection:"row",
-          alignItems: 'center', gap: 5,
-        }}
-        onPress={()=>{
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 5,
+          }}
+          onPress={() => {
             navigation.navigate("AllCategoriesPage", {
-              
-              props:props
-            })
+              props: props,
+            });
           }}
         >
-          <Text style = {{
-            color:'black',
-            fontWeight: '500',
-            fontSize: 14
-          }}> All Categories</Text>
+          <Text
+            style={{
+              color: "black",
+              fontWeight: "500",
+              fontSize: 14,
+            }}
+          >
+            {" "}
+            All Categories
+          </Text>
           <ArrowRightIcon
             style={{
               color: COLORS.mainColor,
@@ -59,7 +68,7 @@ function FuturedRows({ title, description, props }) {
           />
         </Pressable>
       </View>
-      
+
       <Text
         style={{
           paddingLeft: 15,
@@ -70,16 +79,13 @@ function FuturedRows({ title, description, props }) {
         {description}
       </Text>
       <FlatList // amit chven vawyobt bevr titoeul foodze divs
-          data={props}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 0,paddingVertical:5, }}
-          renderItem={( {item}) => <CategoriesRowCard props={item} />}
-          keyExtractor={(item) => item.Type}
+        data={props}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 0, paddingVertical: 5 }}
+        renderItem={({ item }) => <CategoriesRowCard props={item} />}
+        keyExtractor={(item) => item.Type}
       />
-      
-      
-      
     </View>
   );
 }
