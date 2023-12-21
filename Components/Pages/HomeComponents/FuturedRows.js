@@ -56,8 +56,8 @@ function FuturedRows({ title, description, restaurants }) {
         }}
       >
         {/* restaurant cards */}
-        {restaurants.map((eachRestaurant, index) => {
-          return <RestaurantCard key={index} props={eachRestaurant} />;
+        {restaurants.map((eachRestaurant) => {
+          return <RestaurantCard key={eachRestaurant.id} props={eachRestaurant} />;
         })}
       </ScrollView>
     </View>

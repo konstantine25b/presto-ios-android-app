@@ -67,8 +67,8 @@ export default function LogIn() {
     <View style={styles.container}>
       <View style={styles.topLine}>
         <View style={styles.createAccount}>
-          <Text style={styles.createAn}>Log in to</Text>
-          <Text style={styles.account}> Your account</Text>
+          <Text style={styles.createAn}>Log in to Your</Text>
+          <Text style={styles.account}>Presto account</Text>
         </View>
       </View>
       <Text style={styles.otherOptions}> Log in with</Text>

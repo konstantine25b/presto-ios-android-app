@@ -85,7 +85,7 @@ function FuturedRows({ title, description, restaurants }) {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 15, paddingVertical: 5 }}
         renderItem={({ item }) => <RestaurantCard props={item} />}
-        keyExtractor={(item) => item.Title}
+        keyExtractor={(item) => item.title}
       />
     </View>
   );
