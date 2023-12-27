@@ -108,8 +108,8 @@ export const selectBasketItemsWithId = (state, Id) =>
   });
 
 export const selectBasketTotal = (state) => {
-  console.log(state.basket.items)
-  console.log(1)
+  // console.log(state.basket.items)
+  // console.log(1)
   
   // return state.basket.items.reduce(
   //   (total, item) => {

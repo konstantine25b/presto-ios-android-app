@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { store } from "./Components/store";
 import Home from "./Components/Pages/Home";
+import AllCategories from "./Components/Pages/AllCategories";
 
 
 
@@ -26,6 +27,10 @@ export default function App() {
               name="Home"
               component={Home}
               
+            />
+             <Stack.Screen
+              name="AllCategoriesPage"
+              component={AllCategories}
             />
           
         </Stack.Navigator>
