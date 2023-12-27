@@ -17,15 +17,13 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 
-
-
 import COLORS from "../Styles/colors";
 import { API } from "../../Processing/PrestoAPI";
 import { selectBasketItems } from "../Features/BasketSlice";
 import { setRestaurant } from "../Features/RestaurantSlice";
 import OrderNotification from "./Components/OrderNotification";
 import Basket from "./Components/Basket";
-import FoodCategories from "./EachRestaurantComponents/FoodCategories";
+import FoodCategories from "./EachRestaurantComponents/MenuCategories";
 
 // es aris titoueli restornis page sadac sachmlis tipebia daxarisxebuli
 

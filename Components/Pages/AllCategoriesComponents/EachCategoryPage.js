@@ -28,7 +28,7 @@ const EachCategoryPage = () => {
     };
     gettingRestaurantCategories();
   }, []);
-  // console.log(restaurants)
+ 
 
   return (
     <>
@@ -89,7 +89,7 @@ const EachCategoryPage = () => {
           data={restaurants}
           contentContainerStyle={{ paddingBottom: 150 }}
           renderItem={({ item }) => <LargerRestaurantCard props={item} />}
-          keyExtractor={(item) => item.Title}
+          keyExtractor={(item) => item.title}
         />
       </SafeAreaView>
     </>

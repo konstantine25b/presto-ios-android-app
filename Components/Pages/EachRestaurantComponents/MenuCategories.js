@@ -11,7 +11,7 @@ const FoodCategories = (props) => {
     <Pressable // aris patar divi razec restornis titoeul kategoriasd vantavsebt
       onPress={() => {
         // amit masze dacherisas gadavyavart amave kategoriis meniu listshi
-        navigation.navigate("EachCategoryMenuPage", {
+        navigation.navigate("EachMenuCategory", {
           dishes: categories?.dishes,
           categorieTitle: categories?.title,
         });

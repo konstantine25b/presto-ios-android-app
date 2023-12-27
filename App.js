@@ -11,6 +11,7 @@ import Search from "./Components/Pages/Search";
 import EachCategoryPage from "./Components/Pages/AllCategoriesComponents/EachCategoryPage";
 
 import EachRestaurant from "./Components/Pages/EachRestaurant";
+import EachMenuCategory from "./Components/Pages/EachRestaurantComponents/EachMenuCategory";
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
@@ -40,6 +41,10 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="EachRestaurant" component={EachRestaurant} />
+            <Stack.Screen
+              name="EachMenuCategory"
+              component={EachMenuCategory}
+            />
           </Stack.Navigator>
         </Provider>
       </NavigationContainer>
