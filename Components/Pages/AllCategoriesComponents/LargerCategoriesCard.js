@@ -24,7 +24,7 @@ const CategoriesRowCard = ({ props }) => {
     >
       <Pressable
         onPress={() => {
-          navigation.navigate("EachCategoryRestaurantsPage", {
+          navigation.navigate("EachCategoryPage", {
             props: props,
           });
         }}

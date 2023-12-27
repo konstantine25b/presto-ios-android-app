@@ -1,18 +1,18 @@
 import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-import {
-  ArrowLeftIcon,
-  MagnifyingGlassCircleIcon,
-} from "react-native-heroicons/outline";
-import COLORS from "../Styles/colors";
-import LargerRestaurantCard from "./AllRestaurantsComponents/LargerRestaurantCard";
+import { ArrowLeftIcon } from "react-native-heroicons/outline";
 
-// am pageze aris yvela restoranis chamonatvali
-const AllRestaurantsPage = () => {
+import { API } from "../../../Processing/PrestoAPI";
+import LargerRestaurantCard from "../AllRestaurantsComponents/LargerRestaurantCard";
+import COLORS from "../../Styles/colors";
+
+// es aris titoeluli categoriis page sadac aris amave kategoriis restornebi
+
+const EachCategoryPage = () => {
   const navigation = useNavigation();
-
+  const [restaurants, setRestaurants] = useState([]);
   const {
     params: {
       // es parametrebi und mivigot backendidan
@@ -20,7 +20,16 @@ const AllRestaurantsPage = () => {
     },
   } = useRoute(); // am metodit destruqturacias vuketebt props ( am shemtxvevashi useNavigate hookidan migebul infos)
 
-  console.log(props)
+  useEffect(() => {
+    const gettingRestaurantCategories = async () => {
+      let arr1 = await API.getRestaurantsByTag(props.Type);
+
+      setRestaurants(arr1);
+    };
+    gettingRestaurantCategories();
+  }, []);
+  // console.log(restaurants)
+
   return (
     <>
       <SafeAreaView>
@@ -30,9 +39,10 @@ const AllRestaurantsPage = () => {
             borderColor: "gray",
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             width: "100%",
             paddingBottom: 10,
+            paddingHorizontal: 20,
           }}
         >
           <Pressable // es aris ukan gadasvlis gilaki
@@ -54,45 +64,36 @@ const AllRestaurantsPage = () => {
               justifyContent: "center",
             }}
           >
-            <Pressable
-              onPress={() =>
-                navigation.navigate("Search" )
-              }
+            <View
               style={{
                 flexDirection: "row",
                 padding: 5,
                 alignItems: "center",
-                backgroundColor: "lightgray",
-                flex: 0.8,
-                borderRadius: 20,
               }}
             >
-              <MagnifyingGlassCircleIcon style={{ color: "gray" }} />
-              <Text style={{ paddingLeft: 5, color: "gray" }}>
-                Restaurants and Cuisines
+              <Text
+                style={{
+                  fontSize: 35,
+                  color: COLORS.mainColor,
+                  fontWeight: "500",
+                }}
+              >
+                {props.Type}
               </Text>
-            </Pressable>
+            </View>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              paddingLeft: 4,
-              justifyContent: "space-between",
-              color: "black",
-            }}
-          ></View>
+         
         </View>
 
         <FlatList // amit chven vawyobt bevr titoeul foodze divs
-          data={props}
+          data={restaurants}
           contentContainerStyle={{ paddingBottom: 150 }}
-          renderItem={({ item }) => <LargerRestaurantCard  props={item} />}
-          keyExtractor={(item) => item.title}
+          renderItem={({ item }) => <LargerRestaurantCard props={item} />}
+          keyExtractor={(item) => item.Title}
         />
       </SafeAreaView>
     </>
   );
 };
 
-export default AllRestaurantsPage;
+export default EachCategoryPage;
