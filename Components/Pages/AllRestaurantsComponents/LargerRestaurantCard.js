@@ -24,7 +24,7 @@ const LargerRestaurantCard = ({ props }) => {
     >
       <Pressable
         onPress={() => {
-          navigation.navigate("EachRestaurantPage", {
+          navigation.navigate("EachRestaurant", {
             Id: props.id,
             Title: props?.title,
             MainImage: props?.images[0],

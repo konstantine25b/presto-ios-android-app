@@ -20,7 +20,7 @@ const RestaurantCard = ({ props }) => {
     <SafeAreaView>
       <Pressable
         onPress={() => {
-          navigation.navigate("EachRestaurantPage", {
+          navigation.navigate("EachRestaurant", {
             Id: props?.id,
             Title: props?.title,
             MainImage: props?.images[0] ? props.images[0] : null,

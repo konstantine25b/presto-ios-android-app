@@ -20,7 +20,7 @@ const CategoriesRowCard = ({ props }) => {
     <SafeAreaView>
       <Pressable
         onPress={() => {
-          navigation.navigate("EachCategoryRestaurantsPage", {
+          navigation.navigate("EachCategoryPage", {
             props: props,
           });
         }}
