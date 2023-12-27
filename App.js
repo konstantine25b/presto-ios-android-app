@@ -7,6 +7,7 @@ import { store } from "./Components/store";
 import Home from "./Components/Pages/Home";
 import AllCategories from "./Components/Pages/AllCategories";
 import AllRestaurants from "./Components/Pages/AllRestaurants";
+import Search from "./Components/Pages/Search";
 
 
 
@@ -36,6 +37,11 @@ export default function App() {
             <Stack.Screen
               name="AllRestaurants"
               component={AllRestaurants}
+            />
+            <Stack.Screen
+              name="Search"
+              component={Search}
+              options={{ headerShown: false }}
             />
           
         </Stack.Navigator>

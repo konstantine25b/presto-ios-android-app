@@ -15,7 +15,6 @@ import { useNavigation } from "@react-navigation/native";
 import {
   MagnifyingGlassCircleIcon,
   UserIcon,
-
   QrCodeIcon,
 } from "react-native-heroicons/solid";
 
@@ -113,9 +112,7 @@ const HomeScreen = () => {
         </View>
         <Pressable
           onPress={() =>
-            navigation.navigate("SearchPage", {
-             
-              restaurants: allRestaurants,
+            navigation.navigate("Search", {
               transition: "fade",
             })
           }
