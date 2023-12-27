@@ -46,7 +46,7 @@ function FuturedRows({ title, description, props }) {
             gap: 5,
           }}
           onPress={() => {
-            navigation.navigate("AllCategoriesPage", {
+            navigation.navigate("AllCategories", {
               props: props,
             });
           }}

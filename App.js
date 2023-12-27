@@ -6,6 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { store } from "./Components/store";
 import Home from "./Components/Pages/Home";
 import AllCategories from "./Components/Pages/AllCategories";
+import AllRestaurants from "./Components/Pages/AllRestaurants";
 
 
 
@@ -29,8 +30,12 @@ export default function App() {
               
             />
              <Stack.Screen
-              name="AllCategoriesPage"
+              name="AllCategories"
               component={AllCategories}
+            />
+            <Stack.Screen
+              name="AllRestaurants"
+              component={AllRestaurants}
             />
           
         </Stack.Navigator>
