@@ -83,7 +83,7 @@ export const selectBasketItemsWithIdAndIngredients = createSelector(
         areEqual(item.unCheckedIngredients, unCheckedIngredients)
     );
 
-    return filteredItems;
+    return filteredItems.sort((a, b) => a.Id - b.Id);
   }
 );
 

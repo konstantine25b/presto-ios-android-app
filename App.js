@@ -13,6 +13,7 @@ import EachCategoryPage from "./Components/Pages/AllCategoriesComponents/EachCat
 import EachRestaurant from "./Components/Pages/EachRestaurant";
 import EachMenuCategory from "./Components/Pages/EachRestaurantComponents/EachMenuCategory";
 import EachFoodCardInfo from "./Components/Pages/EachRestaurantComponents/EachFoodCardInfo";
+import BasketPage from "./Components/Pages/BasketPage";
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
@@ -50,6 +51,11 @@ export default function App() {
               name="EachFoodCardInfo"
               component={EachFoodCardInfo}
               options={{ presentation: "modal", headerShown: false }}
+            />
+            <Stack.Screen
+              name="BasketPage"
+              component={BasketPage}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </Provider>
