@@ -14,6 +14,7 @@ import EachRestaurant from "./Components/Pages/EachRestaurant";
 import EachMenuCategory from "./Components/Pages/EachRestaurantComponents/EachMenuCategory";
 import EachFoodCardInfo from "./Components/Pages/EachRestaurantComponents/EachFoodCardInfo";
 import BasketPage from "./Components/Pages/BasketPage";
+import Confirm from "./Components/Pages/Confirm";
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
@@ -56,6 +57,11 @@ export default function App() {
               name="BasketPage"
               component={BasketPage}
               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Confirm"
+              options={{ headerShown: false }}
+              component={Confirm}
             />
           </Stack.Navigator>
         </Provider>

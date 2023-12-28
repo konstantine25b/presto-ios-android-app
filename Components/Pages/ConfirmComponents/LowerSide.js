@@ -1,13 +1,11 @@
-import { View, Text, Pressable } from "react-native";
 import React from "react";
+import { View, Text, Pressable } from "react-native";
 import COLORS from "../../Styles/colors";
-import { useSelector } from "react-redux";
-import { selectBasketTotal } from "../../Features/BasketSlice";
-import { useNavigation } from "@react-navigation/native";
 
-export default function LowerSide() {
-  const BasketTotal = useSelector(selectBasketTotal);
-  const navigation = useNavigation();
+export default function LowerSide({
+  BasketTotal,
+  handleSubmitOrder,
+}) {
   return (
     <View
       style={{
@@ -29,7 +27,7 @@ export default function LowerSide() {
       >
         <Text
           style={{
-            color: "gray",
+            color: "lightgray",
             fontSize: 15,
             fontWeight: "500",
           }}
@@ -38,7 +36,7 @@ export default function LowerSide() {
         </Text>
         <Text
           style={{
-            color: "gray",
+            color: "lightgray",
             fontSize: 15,
             fontWeight: "500",
           }}
@@ -58,7 +56,7 @@ export default function LowerSide() {
       >
         <Text
           style={{
-            color: "gray",
+            color: "lightgray",
             fontSize: 15,
             fontWeight: "500",
           }}
@@ -67,7 +65,7 @@ export default function LowerSide() {
         </Text>
         <Text
           style={{
-            color: "gray",
+            color: "lightgray",
             fontSize: 15,
             fontWeight: "500",
           }}
@@ -116,12 +114,14 @@ export default function LowerSide() {
         }}
       >
         <Pressable
-          onPress={() => navigation.navigate("Confirm")}
+          onPress={() => {
+            handleSubmitOrder();
+          }}
           style={{
             backgroundColor: "white",
-            width: "70%",
+            width: "85%",
             padding: 10,
-            borderRadius: 4,
+            borderRadius: 8,
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
@@ -134,7 +134,7 @@ export default function LowerSide() {
               fontWeight: "700",
             }}
           >
-            Go to Payment
+            Confirm Order
           </Text>
         </Pressable>
       </View>
