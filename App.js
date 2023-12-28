@@ -15,6 +15,9 @@ import EachMenuCategory from "./Components/Pages/EachRestaurantComponents/EachMe
 import EachFoodCardInfo from "./Components/Pages/EachRestaurantComponents/EachFoodCardInfo";
 import BasketPage from "./Components/Pages/BasketPage";
 import Confirm from "./Components/Pages/Confirm";
+import SuccessOrder from "./Components/Pages/SuccessOrder";
+import FailOrder from "./Components/Pages/FailOrder";
+import Order from "./Components/Pages/Order";
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
@@ -48,7 +51,7 @@ export default function App() {
               name="EachMenuCategory"
               component={EachMenuCategory}
             />
-             <Stack.Screen
+            <Stack.Screen
               name="EachFoodCardInfo"
               component={EachFoodCardInfo}
               options={{ presentation: "modal", headerShown: false }}
@@ -62,6 +65,21 @@ export default function App() {
               name="Confirm"
               options={{ headerShown: false }}
               component={Confirm}
+            />
+            <Stack.Screen
+              name="Success"
+              component={SuccessOrder}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Fail"
+              component={FailOrder}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Order"
+              component={Order}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </Provider>

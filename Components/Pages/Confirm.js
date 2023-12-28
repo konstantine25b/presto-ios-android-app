@@ -82,10 +82,10 @@ const Confirm= () => {
           ? "Order created successfully!"
           : "Order creation failed."
       );
-      console.log(createOrderSuccess);
+      // console.log(createOrderSuccess);
       createOrderSuccess != -1
-        ? navigation.navigate("SuccessOrderPage")
-        : navigation.navigate("FailOrderPage");
+        ? navigation.navigate("Success")
+        : navigation.navigate("Fail");
     } else {
       const orderData = {
         restaurantId: restaurant.Id, // Replace with the desired restaurant ID
@@ -101,10 +101,10 @@ const Confirm= () => {
           ? "Order created successfully!"
           : "Order creation failed."
       );
-      console.log(createOrderSuccess);
+      // console.log(createOrderSuccess);
       createOrderSuccess != -1
-        ? navigation.navigate("SuccessOrderPage")
-        : navigation.navigate("FailOrderPage");
+        ? navigation.navigate("Success")
+        : navigation.navigate("Fail");
     }
   };
 

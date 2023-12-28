@@ -9,7 +9,7 @@ const OrderNotification = () => {
 
   const handlePress = () => {
     // Navigate to the page where the user can see their order
-    navigation.navigate("OrderPage");
+    navigation.navigate("Order");
   };
 
   return (
