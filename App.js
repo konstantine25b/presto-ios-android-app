@@ -12,6 +12,7 @@ import EachCategoryPage from "./Components/Pages/AllCategoriesComponents/EachCat
 
 import EachRestaurant from "./Components/Pages/EachRestaurant";
 import EachMenuCategory from "./Components/Pages/EachRestaurantComponents/EachMenuCategory";
+import EachFoodCardInfo from "./Components/Pages/EachRestaurantComponents/EachFoodCardInfo";
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
@@ -44,6 +45,11 @@ export default function App() {
             <Stack.Screen
               name="EachMenuCategory"
               component={EachMenuCategory}
+            />
+             <Stack.Screen
+              name="EachFoodCardInfo"
+              component={EachFoodCardInfo}
+              options={{ presentation: "modal", headerShown: false }}
             />
           </Stack.Navigator>
         </Provider>
