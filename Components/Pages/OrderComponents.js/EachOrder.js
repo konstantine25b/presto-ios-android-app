@@ -132,7 +132,7 @@ const EachOrder = ({
       <Pressable
         style={styles.orderButton}
         onPress={() => {
-          navigation.navigate("EachOrderPage", {
+          navigation.navigate("EachOrder", {
             state: { order: order },
           });
         }}

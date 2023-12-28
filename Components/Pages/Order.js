@@ -94,7 +94,6 @@ export default function Order() {
       });
       setOrders(allOrders);
     }
-    // console.log(allOrders);
   }, [allOrders]);
 
   useEffect(() => {

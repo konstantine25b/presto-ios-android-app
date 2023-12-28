@@ -18,6 +18,8 @@ import Confirm from "./Components/Pages/Confirm";
 import SuccessOrder from "./Components/Pages/SuccessOrder";
 import FailOrder from "./Components/Pages/FailOrder";
 import Order from "./Components/Pages/Order";
+import EachOrderDetails from "./Components/Pages/OrderComponents.js/EachOrderDetails";
+import COLORS from "./Components/Styles/colors";
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
@@ -80,6 +82,20 @@ export default function App() {
               name="Order"
               component={Order}
               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EachOrder"
+              component={EachOrderDetails}
+              options={{
+                title: "Order's Detailed Info",
+                headerStyle: {
+                  fontSize: 20,
+                },
+                headerTintColor: COLORS.mainColor,
+                headerTitleStyle: {
+                  fontWeight: "bold",
+                },
+              }}
             />
           </Stack.Navigator>
         </Provider>
