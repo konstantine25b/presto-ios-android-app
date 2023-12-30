@@ -1,12 +1,4 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Pressable,
-  SafeAreaView,
-  TextInput,
-  FlatList,
-} from "react-native";
+import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
 import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import LargerCategoriesCard from "./AllCategoriesComponents/LargerCategoriesCard";

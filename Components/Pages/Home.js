@@ -1,12 +1,4 @@
-import {
-  View,
-  Text,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  TextInput,
-  Pressable,
-} from "react-native";
+import { View, Text, SafeAreaView, ScrollView, Pressable } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import FuturedRows from "./HomeComponents/FuturedRows";
 import FuturedAllRestaurantsRow from "./HomeComponents/FuturedAllRestaurantsRow";
