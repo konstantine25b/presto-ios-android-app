@@ -167,7 +167,8 @@ export class PrestoAPI {
 
             return true;
         } catch (error) {
-            throw error;
+            console.log("login was UnSuccessfull" ,error)
+            // throw error; // es kotem daakomentara imitoro errori tvins chamda
             return false;
         }
     }
