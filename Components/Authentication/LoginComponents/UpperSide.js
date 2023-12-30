@@ -8,7 +8,7 @@ const UpperSide = () => {
       <View style={styles.topLine}>
         <View style={styles.createAccount}>
           <Text style={styles.title}>Log in to Your</Text>
-          <Text style={styles.account}>Presto account</Text>
+          <Text style={styles.subtitle}>Presto account</Text>
         </View>
       </View>
       <Text style={styles.otherOptions}> Log in with</Text>
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   title: { fontSize: 40 },
+  subtitle: { fontSize: 20, marginLeft: 10 },
   otherOptions: { fontSize: 18, color: COLORS.mainColor },
   logos: {
     flexDirection: 'row',
