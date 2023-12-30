@@ -1,40 +1,12 @@
 import { StyleSheet, Text, View, Pressable, Image } from "react-native";
 import COLORS from "../Styles/colors.js";
 import InputFields from "./LoginComponents/InputFields.js";
+import UpperSide from "./LoginComponents/UpperSide.js";
 
 export default function LogIn() {
   return (
     <View style={styles.container}>
-      <View style={styles.topLine}>
-        <View style={styles.createAccount}>
-          <Text style={styles.createAn}>Log in to Your</Text>
-          <Text style={styles.account}>Presto account</Text>
-        </View>
-      </View>
-      <Text style={styles.otherOptions}> Log in with</Text>
-      <View style={styles.logos}>
-        <Pressable>
-          <Image
-            style={styles.img}
-            source={require("../../assets/Google__G__Logo.png")}
-          />
-        </Pressable>
-        <Pressable>
-          <Image
-            style={styles.img}
-            source={require("../../assets/faceBook.png")}
-          />
-        </Pressable>
-      </View>
-      <View
-        style={{ marginBottom: 40, flexDirection: "row", alignItems: "center" }}
-      >
-        <View style={{ flex: 1, height: 1, backgroundColor: "black" }} />
-        <View>
-          <Text style={{ width: 50, textAlign: "center" }}>Or</Text>
-        </View>
-        <View style={{ flex: 1, height: 1, backgroundColor: "black" }} />
-      </View>
+      <UpperSide />
       <InputFields />
     </View>
   );

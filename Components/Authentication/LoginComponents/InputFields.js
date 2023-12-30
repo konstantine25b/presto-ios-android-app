@@ -12,7 +12,7 @@ export default function InputFields() {
   const navigation = useNavigation();
 
   const [passwordIsShown, setPassworVisibility] = useState(false);
-  const [user, setUser] = useState(null);
+
 
   function setVisibility() {
     if (passwordIsShown) {
@@ -35,9 +35,10 @@ export default function InputFields() {
   const handleLogin = async (email, password) => {
     const success = await API.login(email, password);
     if (success) {
-      setUser({ email });
+      console.log("Correct data");
+      navigation.navigate("Home");
     } else {
-      console.log("wrong data");
+      console.log("Wrong Data");
     }
   };
 
@@ -45,11 +46,7 @@ export default function InputFields() {
     console.log(data);
     handleLogin(data.email, data.password);
   };
-  useEffect(() => {
-    if (user != null) {
-      navigation.navigate("Home");
-    }
-  }, [user]);
+  
 
   return (
     <>
