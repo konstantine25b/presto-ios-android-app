@@ -36,14 +36,18 @@ export default function App() {
               component={LogIn}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen name="AllCategories" component={AllCategories} />
             <Stack.Screen
               name="AllRestaurants"
               component={AllRestaurants}
               options={{ headerShown: false }}
             />
-             <Stack.Screen
+            <Stack.Screen
               name="TopRestaurants"
               component={TopRestaurants}
               options={{ headerShown: false }}

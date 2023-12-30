@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, ScrollView, Pressable } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React from "react";
 import FuturedRows from "./HomeComponents/FuturedTopRows";
 import FuturedAllRestaurantsRow from "./HomeComponents/FuturedAllRestaurantsRow";
 import FuturedCategoriesRows from "./HomeComponents/FuturedCategoriesRow";
@@ -9,35 +9,11 @@ import {
   UserIcon,
   QrCodeIcon,
 } from "react-native-heroicons/solid";
-
-// import { getRestaurants } from "../Processing/Database";
-
-import { API } from "../../Processing/PrestoAPI";
 import COLORS from "../Styles/colors";
 
 // es aris mtavari page
 const HomeScreen = () => {
-  const [allRestaurants, setAllRestaurants] = useState([]);
-
   const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-
-    // this way we get all rests from our presto database
-    const gettingAllRest = async () => {
-      await handleGetRestaurants();
-    };
-    gettingAllRest();
-  }, []);
-
-  const handleGetRestaurants = async () => {
-    const allRestaurants = await API.getRestaurants();
-
-    setAllRestaurants(JSON.parse(JSON.stringify(allRestaurants)));
-  };
 
   return (
     <SafeAreaView style={{ backgroundColor: "white" }}>
@@ -135,26 +111,25 @@ const HomeScreen = () => {
         }}
       >
         {/* featured rows*/}
-        {allRestaurants ? (
-          <View
-            style={{
-              paddingBottom: 150,
-            }}
-          >
-            <FuturedRows
-              title="Top Restaurants"
-              description="Discover top-rated dining experiences"
-            />
-            <FuturedCategoriesRows
-              title="Restaurant Categories"
-              description="Taste from all around the world"
-            />
-            <FuturedAllRestaurantsRow
-              title="All Restaurants"
-              description="From A to Z"
-            />
-          </View>
-        ) : null}
+
+        <View
+          style={{
+            paddingBottom: 150,
+          }}
+        >
+          <FuturedRows
+            title="Top Restaurants"
+            description="Discover top-rated dining experiences"
+          />
+          <FuturedCategoriesRows
+            title="Restaurant Categories"
+            description="Taste from all around the world"
+          />
+          <FuturedAllRestaurantsRow
+            title="All Restaurants"
+            description="From A to Z"
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
