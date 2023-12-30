@@ -1,5 +1,12 @@
-import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
-import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Pressable,
+  SafeAreaView,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   ArrowLeftIcon,
@@ -8,22 +15,27 @@ import {
 import COLORS from "../Styles/colors";
 import LargerRestaurantCard from "./Components/LargerRestaurantCard";
 import { API } from "../../Processing/PrestoAPI";
+import { useQuery } from "react-query";
 
 // am pageze aris yvela restoranis chamonatvali
+const handleGetTopRestaurants = async () => {
+  const restaurants = await API.getTopRestaurants(3);
+  return JSON.parse(JSON.stringify(restaurants));
+};
 const TopRestaurants = () => {
   const navigation = useNavigation();
 
-  const [restaurants, setRestaurants] = useState([]);
-  useEffect(() => {
-    // this way we get all rests from our presto database
-
-    handleGetTopRestaurants();
-  }, []);
-
-  const handleGetTopRestaurants = async () => {
-    const restaurants = await API.getTopRestaurants(3);
-    setRestaurants(JSON.parse(JSON.stringify(restaurants)));
-  };
+  const {
+    data: restaurants,
+    isLoading,
+    isError,
+  } = useQuery(["topRestaurants"], () => handleGetTopRestaurants(), {
+    keepPreviousData: true,
+    staleTime: 1000 * 300, // 5 mins
+    onError: (error) => {
+      console.log("Error getting All Restaurants:", error);
+    },
+  });
 
   return (
     <>
@@ -85,13 +97,38 @@ const TopRestaurants = () => {
             }}
           ></View>
         </View>
-
-        <FlatList // amit chven vawyobt bevr titoeul foodze divs
-          data={restaurants}
-          contentContainerStyle={{ paddingBottom: 150 }}
-          renderItem={({ item }) => <LargerRestaurantCard props={item} />}
-          keyExtractor={(item) => item.title}
-        />
+        {isLoading ? (
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ActivityIndicator size="large" color={COLORS.mainColor} />
+            <Text style={{ marginTop: 10 }}>Loading...</Text>
+          </View>
+        ) : isError ? (
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ color: "red", fontSize: 16 }}>
+              Error loading data.
+            </Text>
+            <Text>Please try again later.</Text>
+          </View>
+        ) : (
+          <FlatList // amit chven vawyobt bevr titoeul foodze divs
+            data={restaurants}
+            contentContainerStyle={{ paddingBottom: 150 }}
+            renderItem={({ item }) => <LargerRestaurantCard props={item} />}
+            keyExtractor={(item) => item.title}
+          />
+        )}
       </SafeAreaView>
     </>
   );

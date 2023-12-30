@@ -29,7 +29,7 @@ const AllRestaurantsPage = () => {
     data: restaurants,
     isLoading,
     isError,
-  } = useQuery(["confirmedOrders"], () => handleGetRestaurants(), {
+  } = useQuery(["allRestaurants"], () => handleGetRestaurants(), {
     keepPreviousData: true,
     staleTime: 1000 * 300, // 5 mins
     onError: (error) => {

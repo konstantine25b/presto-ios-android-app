@@ -1,25 +1,32 @@
-import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
-import React, { useEffect, useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { View, Text, Pressable, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
+
+import { useNavigation } from "@react-navigation/native";
 import LargerCategoriesCard from "./AllCategoriesComponents/LargerCategoriesCard";
 import { ArrowLeftIcon } from "react-native-heroicons/outline";
 import COLORS from "../Styles/colors";
 import { getCategoriesList } from "../../Processing/PrestoAPI";
+import { useQuery } from "react-query";
 
 // es aris page sadac aris yvela kategoriis chamonatvali
+const gettingCategories = () => {
+  // aqedan kategoriebi momaqvs
+  let categories = getCategoriesList();
+  return categories;
+};
 const AllCategories = () => {
   const navigation = useNavigation();
 
-  const [foodCategories, setFoodCategories] = useState([]);
-
-  const gettingCategories = () => {
-    // aqedan kategoriebi momaqvs
-    let categories = getCategoriesList();
-    setFoodCategories(categories);
-  };
-  useEffect(() => {
-    gettingCategories();
-  }, []);
+  const {
+    data: categories,
+    isLoading,
+    isError,
+  } = useQuery(["allCategories"], () => gettingCategories(), {
+    keepPreviousData: true,
+    staleTime: 1000 * 300, // 5 mins
+    onError: (error) => {
+      console.log("Error getting All Restaurants:", error);
+    },
+  });
 
   return (
     <>
@@ -83,17 +90,43 @@ const AllCategories = () => {
           ></View>
         </View>
 
-        <FlatList // amit chven vawyobt bevr titoeul foodze divs
-          data={foodCategories}
-          numColumns={2}
-          contentContainerStyle={{
-            paddingBottom: 150,
-            alignSelf: "center",
-            justifyContent: "space-around",
-          }}
-          renderItem={({ item }) => <LargerCategoriesCard props={item} />}
-          keyExtractor={(item) => item.Type}
-        />
+        {isLoading ? (
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ActivityIndicator size="large" color={COLORS.mainColor} />
+            <Text style={{ marginTop: 10 }}>Loading...</Text>
+          </View>
+        ) : isError ? (
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ color: "red", fontSize: 16 }}>
+              Error loading data.
+            </Text>
+            <Text>Please try again later.</Text>
+          </View>
+        ) : (
+          <FlatList // amit chven vawyobt bevr titoeul foodze divs
+            data={categories}
+            numColumns={2}
+            contentContainerStyle={{
+              paddingBottom: 150,
+              alignSelf: "center",
+              justifyContent: "space-around",
+            }}
+            renderItem={({ item }) => <LargerCategoriesCard props={item} />}
+            keyExtractor={(item) => item.Type}
+          />
+        )}
       </SafeAreaView>
     </>
   );
