@@ -31,7 +31,7 @@ export default function App() {
         <Provider store={store}>
           <Stack.Navigator>
             <Stack.Screen
-              name="Log In"
+              name="LogIn"
               component={LogIn}
               options={{ headerShown: false }}
             />

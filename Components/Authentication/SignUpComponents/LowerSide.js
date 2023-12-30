@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     padding: 5,
-    marginBottom: 40,
+    marginBottom: 80,
   },
   logoButton: {
     margin: 3,
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 40,
+    marginTop: 30
   },
   line: {
     flex: 1,

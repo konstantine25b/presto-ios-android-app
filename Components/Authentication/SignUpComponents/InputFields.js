@@ -18,7 +18,7 @@ export default function InputFields() {
   const navigation = useNavigation();
   const [passwordIsShown, setPassworVisibility] = useState(false);
   const [secureEntry, setSecureEntry] = useState(false);
-  const [user, setUser] = useState(null); // kotem chaamata
+  const [errorMessage, setErrorMessage] = useState(null);
 
   function setVisibility() {
     if (passwordIsShown) {
@@ -48,25 +48,27 @@ export default function InputFields() {
   };
 
   const handleSignup = async (username, email, password) => {
-    console.log(username, email, password);
-    const success = await API.register({
-      username,
-      email,
-      password,
-    });
+    try {
+      console.log(username, email, password);
+      const success = await API.register({
+        username,
+        email,
+        password,
+      });
 
-    if (success) {
-      setUser({ email });
-    } else {
-      console.log("wrong data");
+      if (success) {
+        console.log("Registration successful");
+        navigation.navigate("Home"); // Assuming you have a 'Home' screen
+      } else {
+        console.log("Registration failed");
+        setErrorMessage("Registration failed");
+      }
+    } catch (error) {
+      setErrorMessage("Registration failed");
+      console.log("Error during signup:", error);
     }
   };
 
-  useEffect(() => {
-    if (user != null) {
-      navigation.navigate("Home");
-    }
-  }, [user]);
   return (
     <>
       <View style={styles.field}>
@@ -230,7 +232,7 @@ export default function InputFields() {
           style={styles.icon}
         />
       </View>
-
+      {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
       <Pressable
         android_ripple={{ color: "white" }}
         style={styles.signUp}
@@ -246,11 +248,11 @@ export default function InputFields() {
         <Pressable
           android_ripple={{ color: "white" }}
           style={styles.signIn}
-          onPress={() => navigation.navigate("NewLoginScreen")}
+          onPress={() => navigation.navigate("LogIn")}
         >
-          <View>
+         
             <Text style={styles.logInText}>Log In</Text>
-          </View>
+          
         </Pressable>
       </View>
     </>
@@ -285,14 +287,13 @@ const styles = StyleSheet.create({
   },
 
   signIn: {
-    //backgroundColor: mainColor,
-    padding: 5,
-    borderRadius: 10,
+   
+    backgroundColor: COLORS.mainColor,
+    padding: 7,
+    borderRadius: 5,
     marginTop: 10,
     marginLeft: 10,
     width: "20%",
-    marginBottom: 0,
-    paddingBottom: "10%",
   },
   signUp: {
     backgroundColor: COLORS.mainColor,
@@ -300,15 +301,18 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginTop: 15,
     width: "75%",
+    marginBottom: 30
+  
   },
   text: {
     color: "white",
     textAlign: "center",
+    fontSize: 20,
   },
   logInText: {
-    color: COLORS.mainColor,
+    color: "white",
     textAlign: "center",
-    textDecorationLine: "underline",
+    fontSize: 15,
   },
   field: {
     flexDirection: "row",
@@ -331,6 +335,12 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     color: "red",
     fontSize: 13,
+  },
+  errorText: {
+    color: "red",
+    textAlign: "center",
+    marginTop: 10,
+    fontSize: 20,
   },
   inner: {},
 });
