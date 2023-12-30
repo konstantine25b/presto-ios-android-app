@@ -12,7 +12,7 @@ export default function InputFields() {
   const navigation = useNavigation();
 
   const [passwordIsShown, setPassworVisibility] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState(null);
 
   function setVisibility() {
     if (passwordIsShown) {
@@ -33,12 +33,18 @@ export default function InputFields() {
   });
 
   const handleLogin = async (email, password) => {
-    const success = await API.login(email, password);
-    if (success) {
-      console.log("Correct data");
-      navigation.navigate("Home");
-    } else {
-      console.log("Wrong Data");
+    try {
+      const success = await API.login(email, password);
+      if (success) {
+        console.log("Correct data");
+        navigation.navigate("Home");
+      } else {
+        setErrorMessage("Invalid Email or Password");
+        console.log("Wrong Data");
+      }
+    } catch (error) {
+      setErrorMessage("Invalid Email or Password");
+      console.error("Error during login:", error);
     }
   };
 
@@ -46,7 +52,6 @@ export default function InputFields() {
     console.log(data);
     handleLogin(data.email, data.password);
   };
-  
 
   return (
     <>
@@ -104,36 +109,39 @@ export default function InputFields() {
           )}
         </Pressable>
       </View>
+      {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
 
       <Pressable
-        android_ripple={{ color: "white" }}
-        style={styles.signUp}
+        android_ripple={{ color: "black" }}
+        style={styles.signIn}
         onPress={handleSubmit(onSubmit)}
       >
         <View>
-          <Text style={styles.text}>Log In</Text>
+          <Text style={styles.text1}>Log In</Text>
         </View>
       </Pressable>
+    
+      <View style={styles.bottomLine}>
+        <Text style={styles.signInText}>Don't have an account?</Text>
+        <Pressable
+          android_ripple={{ color: "white" }}
+          style={styles.signUp}
+          onPress={() => navigation.navigate("NewSignUpScreen")}
+        >
+          <View>
+            <Text style={styles.text2}>Sign Up</Text>
+          </View>
+        </Pressable>
+      
+      </View>
       <Pressable
         onPress={() => navigation.navigate("ForgotPasswordScreen")}
         android_ripple={{ color: "white" }}
       >
         <View>
-          <Text style={styles.forgotPassword}>forgot password?</Text>
+          <Text style={styles.forgotPassword}>Forgot Password?</Text>
         </View>
       </Pressable>
-      <View style={styles.bottomLine}>
-        <Text style={styles.signInText}>Don't have an account?</Text>
-        <Pressable
-          android_ripple={{ color: "white" }}
-          style={styles.signIn}
-          onPress={() => navigation.navigate("NewSignUpScreen")}
-        >
-          <View>
-            <Text style={styles.text}>Sign Up</Text>
-          </View>
-        </Pressable>
-      </View>
     </>
   );
 }
@@ -160,32 +168,44 @@ const styles = StyleSheet.create({
   forgotPassword: {
     color: COLORS.mainColor,
     textDecorationLine: "underline",
-
-    marginTop: 5,
+    marginTop: 20,
+    fontSize: 15
   },
 
   account: { fontSize: 40, marginLeft: 0 },
 
-  signIn: {
+  signUp: {
     backgroundColor: COLORS.mainColor,
-    padding: 5,
-    borderRadius: 10,
+    padding: 7,
+    borderRadius: 5,
     marginTop: 10,
     marginLeft: 10,
     width: "20%",
-    marginBottom: "25%",
+    
   },
 
-  signUp: {
+  signIn: {
     backgroundColor: COLORS.mainColor,
     padding: 12,
     borderRadius: 10,
     marginTop: 15,
     width: "70%",
   },
-  text: {
+  errorText: {
+    color: "red",
+    textAlign: "center",
+    marginTop: 10,
+    fontSize: 20
+  },
+  text1: {
     color: "white",
     textAlign: "center",
+    fontSize: 20
+  },
+  text2: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 15
   },
 
   field: {
@@ -194,7 +214,8 @@ const styles = StyleSheet.create({
   },
   bottomLine: {
     flexDirection: "row",
-    marginTop: 5,
+    
+    marginTop: 20,
   },
   signInText: {
     marginTop: 15,
