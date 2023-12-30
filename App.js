@@ -62,7 +62,11 @@ export default function App() {
               component={EachCategoryPage}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="EachRestaurant" component={EachRestaurant} />
+            <Stack.Screen
+              name="EachRestaurant"
+              component={EachRestaurant}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="EachMenuCategory"
               component={EachMenuCategory}

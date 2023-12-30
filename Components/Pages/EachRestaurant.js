@@ -5,8 +5,8 @@ import {
   Image,
   Pressable,
   StatusBar,
+  ActivityIndicator,
 } from "react-native";
-
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import {
@@ -14,7 +14,6 @@ import {
   StarIcon,
   MapPinIcon,
 } from "react-native-heroicons/solid";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import COLORS from "../Styles/colors";
@@ -24,9 +23,15 @@ import { setRestaurant } from "../Features/RestaurantSlice";
 import OrderNotification from "./Components/OrderNotification";
 import Basket from "./Components/Basket";
 import FoodCategories from "./EachRestaurantComponents/MenuCategories";
+import { useQuery } from "react-query";
 
 // es aris titoueli restornis page sadac sachmlis tipebia daxarisxebuli
-
+const handleGetRestaurantByTitle = async (restaurantTitle) => {
+  // es davamate 10 oct
+  const restaurantByTitle = await API.getRestaurantByTitle(restaurantTitle);
+  // console.log(restaurantByTitle)
+  return JSON.parse(JSON.stringify(restaurantByTitle));
+};
 const EachRestaurant = () => {
   const [scrollOffset, setScrollOffset] = useState(0);
   const [showView, setShowView] = useState(false);
@@ -58,30 +63,25 @@ const EachRestaurant = () => {
     },
   } = useRoute(); // am metodit destruqturacias vuketebt props ( am shemtxvevashi useNavigate hookidan migebul infos)
 
-  const [restInfo, setRestInfo] = useState();
   // const [restaurantInfo, setRestaurantInfo] = useState([]); // amit vayenebt konkretuli restoarnis informacias
 
   const items = useSelector((state) => selectBasketItems(state)); // amit xdeba yvela itemsis amogeba basketidan ( gvchirdeba ro mati raodenoba gavigot)
   const navigation = useNavigation(); // es huki qmnis navigacias
 
-  const handleGetRestaurantByTitle = async (restaurantTitle) => {
-    // es davamate 10 oct
-    const restaurantByTitle = await API.getRestaurantByTitle(restaurantTitle);
-    // console.log(restaurantByTitle)
-    setRestInfo(JSON.parse(JSON.stringify(restaurantByTitle)));
-  };
-  useLayoutEffect(() => {
-    // es aris imitom ro header ar gamochndes  (ushnod)
-    navigation.setOptions({
-      headerShown: false,
-    });
-    StatusBar.setBarStyle("dark-content", true); // amit vashavebt status bars
-    const gettingRestaurantsInfo = async () => {
-      // am metodit mogvaqvs yvela restorani  da vsetavt mas reduxshi
+  const {
+    data: restInfo,
+    isLoading,
+    isError,
+  } = useQuery(["restInfo"], () => handleGetRestaurantByTitle(Title), {
+    keepPreviousData: true,
+    staleTime: 1000 * 2, // 5 mins
+    onError: (error) => {
+      console.log("Error getting All Restaurants:", error);
+    },
+  });
 
-      await handleGetRestaurantByTitle(Title);
-    };
-    gettingRestaurantsInfo();
+  useLayoutEffect(() => {
+    StatusBar.setBarStyle("dark-content", true); // amit vashavebt status bars
   }, []);
   useEffect(() => {
     dispatch(
@@ -150,7 +150,7 @@ const EachRestaurant = () => {
               fontWeight: "700",
             }}
           >
-            {restInfo.title}
+            {restInfo?.title}
           </Text>
           <View
             style={{
@@ -166,128 +166,153 @@ const EachRestaurant = () => {
                 paddingLeft: 4,
               }}
             >
-              {restInfo.rating}
+              {restInfo?.rating}
             </Text>
           </View>
         </View>
       )}
-
-      <ScrollView
-        style={{
-          backgroundColor: "white",
-          position: "relative",
-        }}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
-      >
+      {isLoading ? (
         <View
           style={{
-            position: "relative",
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <Image // es aris ukana fonze background image roa eg
-            source={{
-              uri: restInfo?.images[0],
-            }}
-            style={{
-              width: "100%",
-              height: 220,
-              backgroundColor: COLORS.mainColor,
-              padding: 4,
-            }}
-          />
+          <ActivityIndicator size="large" color={COLORS.mainColor} />
+          <Text style={{ marginTop: 10 }}>Loading...</Text>
         </View>
-        <View // aq aris agwera reitingis da adgilmdebareobis
+      ) : isError ? (
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ color: "red", fontSize: 16 }}>
+            Error loading data.
+          </Text>
+          <Text>Please try again later.</Text>
+        </View>
+      ) : (
+        <ScrollView
           style={{
             backgroundColor: "white",
             position: "relative",
           }}
+          onScroll={handleScroll}
+          scrollEventThrottle={16}
         >
-          <View style={{ padding: 14 }}>
-            <Text
-              style={{
-                fontSize: 24,
-                fontWeight: "bold",
-                color: COLORS.mainColor,
+          <View
+            style={{
+              position: "relative",
+            }}
+          >
+            <Image // es aris ukana fonze background image roa eg
+              source={{
+                uri: MainImage,
               }}
-            >
-              {restInfo?.title}
-            </Text>
-            <View
               style={{
-                flexDirection: "row",
+                width: "100%",
+                height: 220,
+                backgroundColor: COLORS.mainColor,
+                padding: 4,
               }}
-            >
+            />
+          </View>
+          <View // aq aris agwera reitingis da adgilmdebareobis
+            style={{
+              backgroundColor: "white",
+              position: "relative",
+            }}
+          >
+            <View style={{ padding: 14 }}>
+              <Text
+                style={{
+                  fontSize: 24,
+                  fontWeight: "bold",
+                  color: COLORS.mainColor,
+                }}
+              >
+                {restInfo?.title}
+              </Text>
               <View
                 style={{
+                  flexDirection: "row",
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <StarIcon color="orange" opacity={0.7} size={22} />
+                  <Text>
+                    {restInfo?.rating} . {restInfo?.genre}
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  marginVertical: 5,
                   flexDirection: "row",
                   alignItems: "center",
                 }}
               >
-                <StarIcon color="orange" opacity={0.7} size={22} />
-                <Text>
-                  {restInfo?.rating} . {restInfo?.genre}
-                </Text>
+                <MapPinIcon color={COLORS.mainColor} opacity={0.8} size={22} />
+                <Text>{restInfo?.address}</Text>
               </View>
+              <Text
+                style={{
+                  color: "gray",
+                  marginTop: 10,
+                }}
+              >
+                {restInfo?.description}
+              </Text>
             </View>
-            <View
-              style={{
-                marginVertical: 5,
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <MapPinIcon color={COLORS.mainColor} opacity={0.8} size={22} />
-              <Text>{restInfo?.address}</Text>
-            </View>
-            <Text
-              style={{
-                color: "gray",
-                marginTop: 10,
-              }}
-            >
-              {restInfo?.description}
-            </Text>
           </View>
-        </View>
-        <View // es aris menu ro weria eg
-          style={{
-            borderBottomColor: COLORS.mainColor,
-            borderBottomWidth: 1,
-            borderTopColor: COLORS.mainColor,
-            borderTopWidth: 1,
-            justifyContent: "center",
-            width: "100%",
-            flexDirection: "row",
-          }}
-        >
-          <Text
+          <View // es aris menu ro weria eg
             style={{
-              padding: 13,
-
-              fontWeight: "bold",
-              fontSize: 35,
-              color: COLORS.mainColor,
+              borderBottomColor: COLORS.mainColor,
+              borderBottomWidth: 1,
+              borderTopColor: COLORS.mainColor,
+              borderTopWidth: 1,
+              justifyContent: "center",
+              width: "100%",
+              flexDirection: "row",
             }}
           >
-            Menu
-          </Text>
-        </View>
+            <Text
+              style={{
+                padding: 13,
 
-        <View
-          style={{
-            paddingBottom: 130,
-          }}
-        >
-          {restInfo?.categories?.map(
-            (
-              item // am metodit gadavurbent yvea categories elements da vawyobt matgan FoodCategories componentebs (ra kategoriebic aqvs restorans)
-            ) => (
-              <FoodCategories key={item.title} categories={item} />
-            )
-          )}
-        </View>
-      </ScrollView>
+                fontWeight: "bold",
+                fontSize: 35,
+                color: COLORS.mainColor,
+              }}
+            >
+              Menu
+            </Text>
+          </View>
+
+          <View
+            style={{
+              paddingBottom: 130,
+            }}
+          >
+            {restInfo?.categories?.map(
+              (
+                item // am metodit gadavurbent yvea categories elements da vawyobt matgan FoodCategories componentebs (ra kategoriebic aqvs restorans)
+              ) => (
+                <FoodCategories key={item.title} categories={item} />
+              )
+            )}
+          </View>
+        </ScrollView>
+      )}
     </>
   );
 };
