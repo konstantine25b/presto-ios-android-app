@@ -2,15 +2,17 @@ import { StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 
 import UpperSide from "./SignUpComponents/UpperSide";
 import InputFields from "./SignUpComponents/InputFields";
+import LowerSide from "./SignUpComponents/LowerSide";
 
 export default function SignUp() {
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'position'}
       style={styles.container}
     >
       <UpperSide />
-      <InputFields />
+      <InputFields/>
+      <LowerSide/>
     </KeyboardAvoidingView>
   );
 }

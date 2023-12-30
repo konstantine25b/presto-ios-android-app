@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     width: "20%",
     marginBottom: 0,
-    paddingBottom: "40%",
+    paddingBottom: "10%",
   },
   signUp: {
     backgroundColor: COLORS.mainColor,

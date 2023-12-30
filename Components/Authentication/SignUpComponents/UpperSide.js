@@ -3,82 +3,33 @@ import React from "react";
 import COLORS from "../../Styles/colors";
 
 const UpperSide = () => {
-    return (
-      <>
-        <View style={styles.topLine}>
-          <View style={styles.createAccount}>
-            <Text style={styles.title}>Create Your</Text>
-            <Text style={styles.subtitle}>Presto account</Text>
-          </View>
+  return (
+    <>
+      <View style={styles.topLine}>
+        <View style={styles.createAccount}>
+          <Text style={styles.title}>Create Your</Text>
+          <Text style={styles.subtitle}>Presto account</Text>
         </View>
-        <Text style={styles.otherOptions}> Sign up with</Text>
-        <View style={styles.logos}>
-          <Pressable style={styles.logoButton}>
-            <Image
-              style={styles.logo}
-              source={require('../../../assets/Google__G__Logo.png')}
-            />
-          </Pressable>
-          <Pressable style={styles.logoButton}>
-            <Image
-              style={styles.logo}
-              source={require('../../../assets/faceBook.png')}
-            />
-          </Pressable>
-        </View>
-        <View style={styles.orContainer}>
-          <View style={styles.line} />
-          <Text style={styles.orText}>Or</Text>
-          <View style={styles.line} />
-        </View>
-      </>
-    );
-  };
+      </View>
+    </>
+  );
+};
 
-  const styles = StyleSheet.create({
-    topLine: {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      marginTop: 60,
-    },
-    title: { fontSize: 40 },
-    subtitle: { fontSize: 20, marginLeft: 10 },
-    otherOptions: { fontSize: 18, color: COLORS.mainColor, marginTop: 10 },
-    logos: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      padding: 5,
-      marginBottom: 40,
-    },
-    logoButton: {
-      margin: 3,
-      borderRadius: 35,
-      overflow: 'hidden',
-    },
-    logo: {
-      height: 36,
-      width: 36,
-    },
-    orContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: 40,
-    },
-    line: {
-      flex: 1,
-      height: 1,
-      backgroundColor: 'black',
-    },
-    orText: {
-      marginHorizontal: 10,
-      fontSize: 16,
-      color: 'black',
-    },
-    createAccount: {
-      marginBottom: '13%',
-      marginTop: '0%',
-      alignItems: 'center',
-    },
-  });
-  
-  export default UpperSide;
+const styles = StyleSheet.create({
+  topLine: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginTop: 60,
+  },
+  title: { fontSize: 40 },
+  subtitle: { fontSize: 20, marginLeft: 10 },
+  otherOptions: { fontSize: 18, color: COLORS.mainColor, marginTop: 10 },
+
+  createAccount: {
+    marginBottom: "10%",
+    marginTop: "0%",
+    alignItems: "center",
+  },
+});
+
+export default UpperSide;
