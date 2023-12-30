@@ -20,6 +20,7 @@ import Order from "./Components/Pages/Order";
 import EachOrderDetails from "./Components/Pages/OrderComponents.js/EachOrderDetails";
 import COLORS from "./Components/Styles/colors";
 import SignUp from "./Components/Authentication/SignUp";
+import TopRestaurants from "./Components/Pages/TopRestaurants";
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
@@ -37,7 +38,16 @@ export default function App() {
             />
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="AllCategories" component={AllCategories} />
-            <Stack.Screen name="AllRestaurants" component={AllRestaurants} />
+            <Stack.Screen
+              name="AllRestaurants"
+              component={AllRestaurants}
+              options={{ headerShown: false }}
+            />
+             <Stack.Screen
+              name="TopRestaurants"
+              component={TopRestaurants}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="Search"
               component={Search}
@@ -97,7 +107,7 @@ export default function App() {
                 },
               }}
             />
-             <Stack.Screen
+            <Stack.Screen
               name="SignUp"
               component={SignUp}
               options={{

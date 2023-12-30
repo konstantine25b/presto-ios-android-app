@@ -1,19 +1,25 @@
 import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import LargerCategoriesCard from "./AllCategoriesComponents/LargerCategoriesCard";
 import { ArrowLeftIcon } from "react-native-heroicons/outline";
 import COLORS from "../Styles/colors";
+import { getCategoriesList } from "../../Processing/PrestoAPI";
 
 // es aris page sadac aris yvela kategoriis chamonatvali
 const AllCategories = () => {
   const navigation = useNavigation();
-  const {
-    params: {
-      // es parametrebi und mivigot backendidan
-      props,
-    },
-  } = useRoute(); // am metodit destruqturacias vuketebt props ( am shemtxvevashi useNavigate hookidan migebul infos)
+
+  const [foodCategories, setFoodCategories] = useState([]);
+
+  const gettingCategories = () => {
+    // aqedan kategoriebi momaqvs
+    let categories = getCategoriesList();
+    setFoodCategories(categories);
+  };
+  useEffect(() => {
+    gettingCategories();
+  }, []);
 
   return (
     <>
@@ -78,7 +84,7 @@ const AllCategories = () => {
         </View>
 
         <FlatList // amit chven vawyobt bevr titoeul foodze divs
-          data={props}
+          data={foodCategories}
           numColumns={2}
           contentContainerStyle={{
             paddingBottom: 150,

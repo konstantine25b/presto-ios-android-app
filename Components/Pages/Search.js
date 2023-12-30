@@ -17,7 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { API } from "../../Processing/PrestoAPI";
 import COLORS from "../Styles/colors";
-import LargerRestaurantCard from "./AllRestaurantsComponents/LargerRestaurantCard";
+import LargerRestaurantCard from "./Components/LargerRestaurantCard";
 
 const Search = () => {
   const [searchedWord, setSearchedWord] = useState("");

@@ -1,23 +1,28 @@
-import React from "react";
-import {
-  View,
-  ScrollView,
-  Text,
-  Image,
-  Pressable,
-  FlatList,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, Pressable, FlatList } from "react-native";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 
 import { useNavigation } from "@react-navigation/native";
 
 import COLORS from "../../Styles/colors";
 import CategoriesRowCard from "./CategoriesRowCard";
+import { getCategoriesList } from "../../../Processing/PrestoAPI";
 
 // ess aris homepageze roa categories restaurantis cardebis mwkrivi
 
-function FuturedRows({ title, description, props }) {
+function FuturedRows({ title, description }) {
   const navigation = useNavigation(); // am hookit chven onpressze gadavyavart titoeul restoranis pageze
+
+  const [foodCategories, setFoodCategories] = useState([]);
+  
+  const gettingCategories = () => {
+    // aqedan kategoriebi momaqvs
+    let categories = getCategoriesList();
+    setFoodCategories(categories);
+  };
+  useEffect(() => {
+    gettingCategories();
+  }, []);
 
   return (
     <View>
@@ -46,9 +51,7 @@ function FuturedRows({ title, description, props }) {
             gap: 5,
           }}
           onPress={() => {
-            navigation.navigate("AllCategories", {
-              props: props,
-            });
+            navigation.navigate("AllCategories");
           }}
         >
           <Text
@@ -79,7 +82,7 @@ function FuturedRows({ title, description, props }) {
         {description}
       </Text>
       <FlatList // amit chven vawyobt bevr titoeul foodze divs
-        data={props}
+        data={foodCategories}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 0, paddingVertical: 5 }}

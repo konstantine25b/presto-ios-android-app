@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, ScrollView, Pressable } from "react-native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import FuturedRows from "./HomeComponents/FuturedRows";
+import React, { useLayoutEffect, useState } from "react";
+import FuturedRows from "./HomeComponents/FuturedTopRows";
 import FuturedAllRestaurantsRow from "./HomeComponents/FuturedAllRestaurantsRow";
 import FuturedCategoriesRows from "./HomeComponents/FuturedCategoriesRow";
 import { useNavigation } from "@react-navigation/native";
@@ -12,12 +12,11 @@ import {
 
 // import { getRestaurants } from "../Processing/Database";
 
-import { API, getCategoriesList } from "../../Processing/PrestoAPI";
+import { API } from "../../Processing/PrestoAPI";
 import COLORS from "../Styles/colors";
 
 // es aris mtavari page
 const HomeScreen = () => {
-  const [foodCategories, setFoodCategories] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([]);
 
   const navigation = useNavigation();
@@ -39,16 +38,6 @@ const HomeScreen = () => {
 
     setAllRestaurants(JSON.parse(JSON.stringify(allRestaurants)));
   };
-
-  useEffect(() => {
-    const gettingCategories = () => {
-      // aqedan kategoriebi momaqvs
-      categories = getCategoriesList();
-      setFoodCategories(categories);
-    };
-
-    gettingCategories();
-  }, []);
 
   return (
     <SafeAreaView style={{ backgroundColor: "white" }}>
@@ -153,19 +142,16 @@ const HomeScreen = () => {
             }}
           >
             <FuturedRows
-              title="Restaurant Near You"
-              description="When you feel hungry"
-              restaurants={allRestaurants}
+              title="Top Restaurants"
+              description="Discover top-rated dining experiences"
             />
             <FuturedCategoriesRows
               title="Restaurant Categories"
               description="Taste from all around the world"
-              props={foodCategories}
             />
             <FuturedAllRestaurantsRow
               title="All Restaurants"
               description="From A to Z"
-              restaurants={allRestaurants}
             />
           </View>
         ) : null}

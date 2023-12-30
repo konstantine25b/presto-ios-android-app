@@ -5,7 +5,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { ArrowLeftIcon } from "react-native-heroicons/outline";
 
 import { API } from "../../../Processing/PrestoAPI";
-import LargerRestaurantCard from "../AllRestaurantsComponents/LargerRestaurantCard";
+import LargerRestaurantCard from "../Components/LargerRestaurantCard";
 import COLORS from "../../Styles/colors";
 
 // es aris titoeluli categoriis page sadac aris amave kategoriis restornebi
@@ -28,7 +28,6 @@ const EachCategoryPage = () => {
     };
     gettingRestaurantCategories();
   }, []);
- 
 
   return (
     <>
@@ -82,7 +81,6 @@ const EachCategoryPage = () => {
               </Text>
             </View>
           </View>
-         
         </View>
 
         <FlatList // amit chven vawyobt bevr titoeul foodze divs

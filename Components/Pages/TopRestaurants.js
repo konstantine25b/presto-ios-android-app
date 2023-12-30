@@ -10,19 +10,19 @@ import LargerRestaurantCard from "./Components/LargerRestaurantCard";
 import { API } from "../../Processing/PrestoAPI";
 
 // am pageze aris yvela restoranis chamonatvali
-const AllRestaurantsPage = () => {
+const TopRestaurants = () => {
   const navigation = useNavigation();
 
   const [restaurants, setRestaurants] = useState([]);
   useEffect(() => {
     // this way we get all rests from our presto database
 
-    handleGetRestaurants();
+    handleGetTopRestaurants();
   }, []);
 
-  const handleGetRestaurants = async () => {
-    const allRestaurants = await API.getRestaurants();
-    setRestaurants(JSON.parse(JSON.stringify(allRestaurants)));
+  const handleGetTopRestaurants = async () => {
+    const restaurants = await API.getTopRestaurants(3);
+    setRestaurants(JSON.parse(JSON.stringify(restaurants)));
   };
 
   return (
@@ -97,4 +97,4 @@ const AllRestaurantsPage = () => {
   );
 };
 
-export default AllRestaurantsPage;
+export default TopRestaurants;

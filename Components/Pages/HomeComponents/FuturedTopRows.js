@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable, FlatList } from "react-native";
+import { View, Text, FlatList, Pressable } from "react-native";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
-import { useNavigation } from "@react-navigation/native";
 import COLORS from "../../Styles/colors";
 import RestaurantCard from "./RestaurantCard";
 import { API } from "../../../Processing/PrestoAPI";
+import { useNavigation } from "@react-navigation/native";
 
-// ess aris homepageze roa all restaurantis cardebis mwkrivi
+// ess aris homepageze roa futured near restaurantis cardebis mwkrivi
 
 function FuturedRows({ title, description }) {
-  const navigation = useNavigation(); // am hookit chven onpressze gadavyavart titoeul restoranis pageze
+  const [toprests, setToprests] = useState([]);
+  const navigation = useNavigation(); 
 
-  const [restaurants, setRestaurants] = useState([]);
   useEffect(() => {
     // this way we get all rests from our presto database
 
-    handleGetRestaurants();
+    handleGetTopRestaurants();
   }, []);
 
-  const handleGetRestaurants = async () => {
-    const allRestaurants = await API.getRestaurantsByPageAndQuantity(0, 4);
-    setRestaurants(JSON.parse(JSON.stringify(allRestaurants)));
+  const handleGetTopRestaurants = async () => {
+    const restaurants = await API.getTopRestaurants(2);
+    setToprests(JSON.parse(JSON.stringify(restaurants)));
   };
 
   return (
@@ -50,7 +50,7 @@ function FuturedRows({ title, description }) {
             gap: 5,
           }}
           onPress={() => {
-            navigation.navigate("AllRestaurants");
+            navigation.navigate("TopRestaurants");
           }}
         >
           <Text
@@ -61,7 +61,7 @@ function FuturedRows({ title, description }) {
             }}
           >
             {" "}
-            All Restaurants
+            Top Restaurants
           </Text>
           <ArrowRightIcon
             style={{
@@ -70,7 +70,6 @@ function FuturedRows({ title, description }) {
           />
         </Pressable>
       </View>
-
       <Text
         style={{
           paddingLeft: 15,
@@ -80,9 +79,8 @@ function FuturedRows({ title, description }) {
       >
         {description}
       </Text>
-
       <FlatList // amit chven vawyobt bevr titoeul foodze divs
-        data={restaurants}
+        data={toprests}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 15, paddingVertical: 5 }}
