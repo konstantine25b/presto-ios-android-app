@@ -20,6 +20,10 @@ const formatTime = (time) => {
 
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 };
+const fetchallOrders = async () => {
+  const allOrders = await API.getOrders();
+  return allOrders;
+};
 export default function Order() {
   const navigation = useNavigation();
 
@@ -27,17 +31,12 @@ export default function Order() {
     navigation.navigate("Home");
   };
 
-  const fetchallOrders = async () => {
-    const allOrders = await API.getOrders();
-    return allOrders;
-  };
-
   const {
     data: allOrders,
     isLoading,
     isError,
     refetch,
-  } = useQuery(["allOrders"], () => fetchallOrders(), {
+  } = useQuery(["orders"], () => fetchallOrders(), {
     keepPreviousData: true,
     staleTime: 1000 * 3, // 3 secs
     refetchInterval: 3000, // 3 secs
