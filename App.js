@@ -9,7 +9,6 @@ import AllCategories from "./Components/Pages/AllCategories";
 import AllRestaurants from "./Components/Pages/AllRestaurants";
 import Search from "./Components/Pages/Search";
 import EachCategoryPage from "./Components/Pages/AllCategoriesComponents/EachCategoryPage";
-
 import EachRestaurant from "./Components/Pages/EachRestaurant";
 import EachMenuCategory from "./Components/Pages/EachRestaurantComponents/EachMenuCategory";
 import EachFoodCardInfo from "./Components/Pages/EachRestaurantComponents/EachFoodCardInfo";
@@ -20,6 +19,7 @@ import FailOrder from "./Components/Pages/FailOrder";
 import Order from "./Components/Pages/Order";
 import EachOrderDetails from "./Components/Pages/OrderComponents.js/EachOrderDetails";
 import COLORS from "./Components/Styles/colors";
+import SignUp from "./Components/Authentication/SignUp";
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
@@ -88,6 +88,20 @@ export default function App() {
               component={EachOrderDetails}
               options={{
                 title: "Order's Detailed Info",
+                headerStyle: {
+                  fontSize: 20,
+                },
+                headerTintColor: COLORS.mainColor,
+                headerTitleStyle: {
+                  fontWeight: "bold",
+                },
+              }}
+            />
+             <Stack.Screen
+              name="SignUp"
+              component={SignUp}
+              options={{
+                title: "Sign Up",
                 headerStyle: {
                   fontSize: 20,
                 },

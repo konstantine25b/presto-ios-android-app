@@ -1,7 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import CustomTextField from "./CustomTextField";
+import CustomTextField from "../AuthComponets/CustomTextField";
 import { EnvelopeIcon, LockClosedIcon } from "react-native-heroicons/outline";
 import { EyeIcon, EyeSlashIcon } from "react-native-heroicons/solid";
 import COLORS from "../../Styles/colors";
@@ -120,19 +120,18 @@ export default function InputFields() {
           <Text style={styles.text1}>Log In</Text>
         </View>
       </Pressable>
-    
+
       <View style={styles.bottomLine}>
         <Text style={styles.signInText}>Don't have an account?</Text>
         <Pressable
           android_ripple={{ color: "white" }}
           style={styles.signUp}
-          onPress={() => navigation.navigate("NewSignUpScreen")}
+          onPress={() => navigation.navigate("SignUp")}
         >
           <View>
             <Text style={styles.text2}>Sign Up</Text>
           </View>
         </Pressable>
-      
       </View>
       <Pressable
         onPress={() => navigation.navigate("ForgotPasswordScreen")}
@@ -169,7 +168,7 @@ const styles = StyleSheet.create({
     color: COLORS.mainColor,
     textDecorationLine: "underline",
     marginTop: 20,
-    fontSize: 15
+    fontSize: 15,
   },
 
   account: { fontSize: 40, marginLeft: 0 },
@@ -181,7 +180,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 10,
     width: "20%",
-    
   },
 
   signIn: {
@@ -195,17 +193,17 @@ const styles = StyleSheet.create({
     color: "red",
     textAlign: "center",
     marginTop: 10,
-    fontSize: 20
+    fontSize: 20,
   },
   text1: {
     color: "white",
     textAlign: "center",
-    fontSize: 20
+    fontSize: 20,
   },
   text2: {
     color: "white",
     textAlign: "center",
-    fontSize: 15
+    fontSize: 15,
   },
 
   field: {
@@ -214,7 +212,7 @@ const styles = StyleSheet.create({
   },
   bottomLine: {
     flexDirection: "row",
-    
+
     marginTop: 20,
   },
   signInText: {

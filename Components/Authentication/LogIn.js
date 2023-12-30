@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable, Image } from "react-native";
+import { StyleSheet, View } from "react-native";
 import COLORS from "../Styles/colors.js";
 import InputFields from "./LoginComponents/InputFields.js";
 import UpperSide from "./LoginComponents/UpperSide.js";
