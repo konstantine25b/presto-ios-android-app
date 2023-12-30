@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, Pressable, FlatList } from "react-native";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 
@@ -7,22 +7,27 @@ import { useNavigation } from "@react-navigation/native";
 import COLORS from "../../Styles/colors";
 import CategoriesRowCard from "./CategoriesRowCard";
 import { getCategoriesList } from "../../../Processing/PrestoAPI";
+import { useQuery } from "react-query";
 
 // ess aris homepageze roa categories restaurantis cardebis mwkrivi
-
+const gettingCategories = () => {
+  // aqedan kategoriebi momaqvs
+  let categories = getCategoriesList();
+  return categories;
+};
 function FuturedRows({ title, description }) {
   const navigation = useNavigation(); // am hookit chven onpressze gadavyavart titoeul restoranis pageze
 
-  const [foodCategories, setFoodCategories] = useState([]);
-  
-  const gettingCategories = () => {
-    // aqedan kategoriebi momaqvs
-    let categories = getCategoriesList();
-    setFoodCategories(categories);
-  };
-  useEffect(() => {
-    gettingCategories();
-  }, []);
+  const {
+    data: categories,
+    
+  } = useQuery(["allCategories"], () => gettingCategories(), {
+    keepPreviousData: true,
+    staleTime: 1000 * 300, // 5 mins
+    onError: (error) => {
+      console.log("Error getting All Restaurants:", error);
+    },
+  });
 
   return (
     <View>
@@ -82,7 +87,7 @@ function FuturedRows({ title, description }) {
         {description}
       </Text>
       <FlatList // amit chven vawyobt bevr titoeul foodze divs
-        data={foodCategories}
+        data={categories}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 0, paddingVertical: 5 }}
