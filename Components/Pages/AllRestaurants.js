@@ -20,7 +20,7 @@ const AllRestaurantsPage = () => {
     },
   } = useRoute(); // am metodit destruqturacias vuketebt props ( am shemtxvevashi useNavigate hookidan migebul infos)
 
-  console.log(props)
+  // console.log(props)
   return (
     <>
       <SafeAreaView>

@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, Pressable, Image } from "react-native";
-
 import { useForm, Controller } from "react-hook-form";
 import { useState, useEffect } from "react";
 import {
@@ -10,7 +9,7 @@ import {
 import { EyeIcon, EyeSlashIcon } from "react-native-heroicons/solid";
 import { useNavigation } from "@react-navigation/native";
 import COLORS from "../Styles/colors.js";
-import CustomTextField from "./AuthComponets/CustomTextField.js";
+import CustomTextField from "./LoginComponents/CustomTextField.js";
 import { API } from "../../Processing/PrestoAPI";
 const mainColor = "#622A0F";
 
