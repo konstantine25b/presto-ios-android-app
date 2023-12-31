@@ -13,6 +13,7 @@ import {
   ClockIcon,
   CreditCardIcon,
   CogIcon,
+  ChatBubbleLeftIcon,
   ArrowLeftOnRectangleIcon,
 } from "react-native-heroicons/outline";
 import COLORS from "../Styles/colors";
@@ -60,7 +61,7 @@ export default function Profile() {
           size={120}
           color={COLORS.mainColor}
         />
-        <Text style={styles.username}>{userName}</Text>
+        <Text style={styles.username}>Hello, {userName} !</Text>
       </View>
 
       <ProfileSection
@@ -78,7 +79,13 @@ export default function Profile() {
         Icon={CreditCardIcon}
         Title={"Payment Methods"}
       />
+      
       <ProfileSection color={COLORS.white} Icon={CogIcon} Title={"Settings"} />
+      <ProfileSection
+        color={COLORS.white}
+        Icon={ChatBubbleLeftIcon}
+        Title={"Contact Us"}
+      />
 
       <Pressable style={styles.logoutButton} onPress={handleLogout}>
         <View style={styles.logoutButtonContent}>
@@ -93,7 +100,6 @@ export default function Profile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
   },
   header: {
     display: "flex",
