@@ -1,5 +1,12 @@
-import React from "react";
-import { View, Text, Pressable, StyleSheet, ScrollView } from "react-native";
+import React, { useContext } from "react";
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  ScrollView,
+  Alert,
+} from "react-native";
 import { Avatar } from "@react-native-material/core";
 import {
   UserIcon,
@@ -11,24 +18,49 @@ import {
 import COLORS from "../Styles/colors";
 import { useNavigation } from "@react-navigation/native";
 import ProfileSection from "./Components/ProfileSection";
+import UserContext from "../Authentication/Context/UserContext";
+
 
 export default function Profile() {
   const navigation = useNavigation();
 
-  const navigateToSection = (str) => {
-    console.log(str);
+  const handleLogout = () => {
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to log out?",
+      [
+        {
+          text: "No",
+          style: "cancel",
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            console.log("Logout confirmed");
+            navigation.navigate("LogIn");
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
+  const context = useContext(UserContext);
+  const user = context.user
+
+  console.log(1, JSON.stringify(user._j, null, 2));
+  let userName = user?.name;
+  console.log(userName);
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
         <Avatar
           style={styles.avatar}
-          label={"JD"}
+          label={userName}
           size={120}
           color={COLORS.mainColor}
         />
-        <Text style={styles.username}>John Doe</Text>
+        <Text style={styles.username}>{userName}</Text>
       </View>
 
       <ProfileSection
@@ -48,10 +80,7 @@ export default function Profile() {
       />
       <ProfileSection color={COLORS.white} Icon={CogIcon} Title={"Settings"} />
 
-      <Pressable
-        style={styles.logoutButton}
-        onPress={() => console.log("Logout pressed")}
-      >
+      <Pressable style={styles.logoutButton} onPress={handleLogout}>
         <View style={styles.logoutButtonContent}>
           <ArrowLeftOnRectangleIcon size={24} color={COLORS.white} />
           <Text style={styles.logoutButtonText}>Log Out</Text>
@@ -87,15 +116,7 @@ const styles = StyleSheet.create({
     color: COLORS.text,
     marginTop: 10,
   },
-  logoutButton: {
-    alignItems: "center",
-    backgroundColor: COLORS.redish,
-    borderRadius: 10,
-    padding: 15,
-    marginTop: 20,
-    width: "50%",
-    marginLeft: "2%",
-  },
+
   logoutButtonContent: {
     flexDirection: "row",
     alignItems: "center",
@@ -105,5 +126,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginLeft: 10,
+  },
+  logoutButton: {
+    alignItems: "center",
+    backgroundColor: COLORS.redish,
+    borderRadius: 10,
+    padding: 15,
+    marginTop: 20,
+    width: "50%",
+    marginLeft: "2%",
   },
 });

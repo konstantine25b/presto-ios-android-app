@@ -22,131 +22,140 @@ import COLORS from "./Components/Styles/colors";
 import SignUp from "./Components/Authentication/SignUp";
 import TopRestaurants from "./Components/Pages/TopRestaurants";
 import Profile from "./Components/Profile/Profile";
+import { useState } from "react";
+import UserContext from "./Components/Authentication/Context/UserContext";
+
+
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
 
+
+
 export default function App() {
+  const [user, setUser] = useState(null);
   return (
-    <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
-        <Provider store={store}>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="LogIn"
-              component={LogIn}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="AllCategories" component={AllCategories} />
-            <Stack.Screen
-              name="AllRestaurants"
-              component={AllRestaurants}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="TopRestaurants"
-              component={TopRestaurants}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Search"
-              component={Search}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="EachCategoryPage"
-              component={EachCategoryPage}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="EachRestaurant"
-              component={EachRestaurant}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="EachMenuCategory"
-              component={EachMenuCategory}
-            />
-            <Stack.Screen
-              name="EachFoodCardInfo"
-              component={EachFoodCardInfo}
-              options={{ presentation: "modal", headerShown: false }}
-            />
-            <Stack.Screen
-              name="BasketPage"
-              component={BasketPage}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Confirm"
-              options={{ headerShown: false }}
-              component={Confirm}
-            />
-            <Stack.Screen
-              name="Success"
-              component={SuccessOrder}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Fail"
-              component={FailOrder}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Order"
-              component={Order}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="EachOrder"
-              component={EachOrderDetails}
-              options={{
-                title: "Order's Detailed Info",
-                headerStyle: {
-                  fontSize: 20,
-                },
-                headerTintColor: COLORS.mainColor,
-                headerTitleStyle: {
-                  fontWeight: "bold",
-                },
-              }}
-            />
-            <Stack.Screen
-              name="SignUp"
-              component={SignUp}
-              options={{
-                title: "Sign Up",
-                headerStyle: {
-                  fontSize: 20,
-                },
-                headerTintColor: COLORS.mainColor,
-                headerTitleStyle: {
-                  fontWeight: "bold",
-                },
-              }}
-            />
-            <Stack.Screen
-              name="Profile"
-              component={Profile}
-              options={{
-                title: "Profile",
-                headerStyle: {
-                  fontSize: 20,
-                },
-                headerTintColor: COLORS.mainColor,
-                headerTitleStyle: {
-                  fontWeight: "bold",
-                },
-              }}
-            />
-          </Stack.Navigator>
-        </Provider>
-      </NavigationContainer>
-    </QueryClientProvider>
+    <UserContext.Provider value={{ user, setUser }}>
+      <QueryClientProvider client={queryClient}>
+        <NavigationContainer>
+          <Provider store={store}>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="LogIn"
+                component={LogIn}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen name="AllCategories" component={AllCategories} />
+              <Stack.Screen
+                name="AllRestaurants"
+                component={AllRestaurants}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="TopRestaurants"
+                component={TopRestaurants}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Search"
+                component={Search}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="EachCategoryPage"
+                component={EachCategoryPage}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="EachRestaurant"
+                component={EachRestaurant}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="EachMenuCategory"
+                component={EachMenuCategory}
+              />
+              <Stack.Screen
+                name="EachFoodCardInfo"
+                component={EachFoodCardInfo}
+                options={{ presentation: "modal", headerShown: false }}
+              />
+              <Stack.Screen
+                name="BasketPage"
+                component={BasketPage}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Confirm"
+                options={{ headerShown: false }}
+                component={Confirm}
+              />
+              <Stack.Screen
+                name="Success"
+                component={SuccessOrder}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Fail"
+                component={FailOrder}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Order"
+                component={Order}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="EachOrder"
+                component={EachOrderDetails}
+                options={{
+                  title: "Order's Detailed Info",
+                  headerStyle: {
+                    fontSize: 20,
+                  },
+                  headerTintColor: COLORS.mainColor,
+                  headerTitleStyle: {
+                    fontWeight: "bold",
+                  },
+                }}
+              />
+              <Stack.Screen
+                name="SignUp"
+                component={SignUp}
+                options={{
+                  title: "Sign Up",
+                  headerStyle: {
+                    fontSize: 20,
+                  },
+                  headerTintColor: COLORS.mainColor,
+                  headerTitleStyle: {
+                    fontWeight: "bold",
+                  },
+                }}
+              />
+              <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                  title: "Profile",
+                  headerStyle: {
+                    fontSize: 20,
+                  },
+                  headerTintColor: COLORS.mainColor,
+                  headerTitleStyle: {
+                    fontWeight: "bold",
+                  },
+                }}
+              />
+            </Stack.Navigator>
+          </Provider>
+        </NavigationContainer>
+      </QueryClientProvider>
+    </UserContext.Provider>
   );
 }

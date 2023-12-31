@@ -1,5 +1,5 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import CustomTextField from "../AuthComponets/CustomTextField";
 import { EnvelopeIcon, LockClosedIcon } from "react-native-heroicons/outline";
@@ -7,6 +7,9 @@ import { EyeIcon, EyeSlashIcon } from "react-native-heroicons/solid";
 import COLORS from "../../Styles/colors";
 import { useNavigation } from "@react-navigation/native";
 import { API } from "../../../Processing/PrestoAPI";
+import UserContext from "../Context/UserContext";
+
+
 
 export default function InputFields() {
   const navigation = useNavigation();
@@ -32,11 +35,16 @@ export default function InputFields() {
     },
   });
 
+  const context = useContext(UserContext);
+
   const handleLogin = async (email, password) => {
     try {
       const success = await API.login(email, password);
       if (success) {
         console.log("Correct data");
+        let user = await API.getUser();
+        await context.setUser(user); // amit vsetavt contextshi users
+        console.log(1, user);
         navigation.navigate("Home");
       } else {
         setErrorMessage("Invalid Email or Password");

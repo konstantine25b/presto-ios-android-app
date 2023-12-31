@@ -1,4 +1,4 @@
-import { StyleSheet, View, KeyboardAvoidingView, Platform } from "react-native";
+import { StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import InputFields from "./LoginComponents/InputFields.js";
 import UpperSide from "./LoginComponents/UpperSide.js";
 
