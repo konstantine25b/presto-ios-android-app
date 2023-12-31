@@ -75,7 +75,7 @@ export default function Profile() {
         Icon={ClockIcon}
         Title={"Order History"}
         navigation={navigation}
-        pageName={"OrderHistory"}
+        pageName={"Order"}
       />
       <ProfileSection
         color={COLORS.white}

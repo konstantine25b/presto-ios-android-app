@@ -1,5 +1,4 @@
 import { View, Text, Pressable, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
-
 import { useNavigation } from "@react-navigation/native";
 import LargerCategoriesCard from "./AllCategoriesComponents/LargerCategoriesCard";
 import { ArrowLeftIcon } from "react-native-heroicons/outline";
