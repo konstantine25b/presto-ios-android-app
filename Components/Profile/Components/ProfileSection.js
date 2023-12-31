@@ -3,18 +3,12 @@ import React from "react";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 import COLORS from "../../Styles/colors";
 
-export default function ProfileSection({ Title, Icon, color }) {
+export default function ProfileSection({ Title, Icon, color, navigation, pageName }) {
   return (
     <Pressable
-      style={({ pressed }) => [
-        styles.section,
-        {
-          backgroundColor: pressed ? COLORS.mainColor : COLORS.mainColor,
-        },
-      ]}
-      android_ripple={{ color: COLORS.rippleEffect }}
+      style={styles.section}
       onPress={() => {
-        navigateToSection(Title);
+        navigation.navigate(pageName);
       }}
     >
       <View style={styles.contentWrapper}>
@@ -34,6 +28,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 20,
+    backgroundColor: COLORS.mainColor,
     borderRadius: 15,
     padding: 15,
     shadowColor: COLORS.light2,

@@ -21,7 +21,6 @@ import { useNavigation } from "@react-navigation/native";
 import ProfileSection from "./Components/ProfileSection";
 import UserContext from "../Authentication/Context/UserContext";
 
-
 export default function Profile() {
   const navigation = useNavigation();
 
@@ -47,7 +46,7 @@ export default function Profile() {
   };
 
   const context = useContext(UserContext);
-  const user = context.user
+  const user = context.user;
 
   console.log(1, JSON.stringify(user._j, null, 2));
   let userName = user?.name;
@@ -68,23 +67,37 @@ export default function Profile() {
         color={COLORS.white}
         Icon={UserIcon}
         Title={"Account Information"}
+        navigation={navigation}
+        pageName={"Account"}
       />
       <ProfileSection
         color={COLORS.white}
         Icon={ClockIcon}
         Title={"Order History"}
+        navigation={navigation}
+        pageName={"OrderHistory"}
       />
       <ProfileSection
         color={COLORS.white}
         Icon={CreditCardIcon}
         Title={"Payment Methods"}
+        navigation={navigation}
+        pageName={"PaymentMethods"}
       />
-      
-      <ProfileSection color={COLORS.white} Icon={CogIcon} Title={"Settings"} />
+
+      <ProfileSection
+        color={COLORS.white}
+        Icon={CogIcon}
+        Title={"Settings"}
+        navigation={navigation}
+        pageName={"Settings"}
+      />
       <ProfileSection
         color={COLORS.white}
         Icon={ChatBubbleLeftIcon}
+        pageName={"ContactUs"}
         Title={"Contact Us"}
+        navigation={navigation}
       />
 
       <Pressable style={styles.logoutButton} onPress={handleLogout}>
