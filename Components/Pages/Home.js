@@ -42,9 +42,7 @@ const HomeScreen = () => {
               borderRadius: 30,
             }}
             onPress={() => {
-              navigation.navigate("NewProfileScreen", {
-                UserName: "Konstantine Bakhutashvili",
-              });
+              navigation.navigate("Profile");
             }}
           >
             {/* <Avatar  label="Konstantine Bakhutashvili" size={35} color="#622A0F"/> */}

@@ -21,6 +21,7 @@ import EachOrderDetails from "./Components/Pages/OrderComponents.js/EachOrderDet
 import COLORS from "./Components/Styles/colors";
 import SignUp from "./Components/Authentication/SignUp";
 import TopRestaurants from "./Components/Pages/TopRestaurants";
+import Profile from "./Components/Profile/Profile";
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
@@ -120,6 +121,20 @@ export default function App() {
               component={SignUp}
               options={{
                 title: "Sign Up",
+                headerStyle: {
+                  fontSize: 20,
+                },
+                headerTintColor: COLORS.mainColor,
+                headerTitleStyle: {
+                  fontWeight: "bold",
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Profile"
+              component={Profile}
+              options={{
+                title: "Profile",
                 headerStyle: {
                   fontSize: 20,
                 },
