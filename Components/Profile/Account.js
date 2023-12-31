@@ -6,6 +6,7 @@ import {
   CreditCardIcon,
   ShieldCheckIcon,
   UserIcon,
+  EnvelopeIcon,
 } from "react-native-heroicons/outline";
 import COLORS from "../Styles/colors";
 import AccountSection from "./AccountComponents/AccountSection";
@@ -18,17 +19,24 @@ export default function Account() {
 
   const context = useContext(UserContext);
   const user = context.user;
-  const userName = user?.name
+  const userName = user?.name;
   const email = user?.email;
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
         <View style={styles.userHeader}>
-          <UserIcon size={40} color={COLORS.mainColor} style={styles.userIcon} />
+          <UserIcon
+            size={40}
+            color={COLORS.mainColor}
+            style={styles.userIcon}
+          />
           <Text style={styles.greeting}>{userName}</Text>
         </View>
-        <Text style={styles.email}>{email}</Text>
+        <View style={styles.emailContainer}>
+          <EnvelopeIcon size={20} color={COLORS.mainColor} style={styles.emailIcon} />
+          <Text style={styles.email}>{email}</Text>
+        </View>
       </View>
 
       <AccountSection
@@ -80,7 +88,14 @@ const styles = StyleSheet.create({
   },
   email: {
     fontSize: 16,
-    color: COLORS.gray,
+   
+  },
+  emailContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 5,
+  },
+  emailIcon: {
+    marginRight: 5,
   },
 });
