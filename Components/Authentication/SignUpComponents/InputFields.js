@@ -6,13 +6,14 @@ import {
   EnvelopeIcon,
   LockClosedIcon,
 } from "react-native-heroicons/outline";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "react-native-heroicons/solid";
 import { useNavigation } from "@react-navigation/native";
 
 import COLORS from "../../Styles/colors";
 import CustomTextField from "../AuthComponets/CustomTextField";
 import { API } from "../../../Processing/PrestoAPI";
+import UserContext from "../Context/UserContext";
 
 export default function InputFields() {
   const navigation = useNavigation();
@@ -47,6 +48,7 @@ export default function InputFields() {
     handleSignup(data.name, data.email, data.password);
   };
 
+  const context = useContext(UserContext);
   const handleSignup = async (username, email, password) => {
     try {
       console.log(username, email, password);
@@ -58,6 +60,9 @@ export default function InputFields() {
 
       if (success) {
         console.log("Registration successful");
+        let user = await API.getUser();
+        await context.setUser(user); // amit vsetavt contextshi users
+        console.log(1, user);
         navigation.navigate("Home"); // Assuming you have a 'Home' screen
       } else {
         console.log("Registration failed");
