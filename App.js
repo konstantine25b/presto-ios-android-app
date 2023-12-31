@@ -24,6 +24,7 @@ import TopRestaurants from "./Components/Pages/TopRestaurants";
 import Profile from "./Components/Profile/Profile";
 import { useState } from "react";
 import UserContext from "./Components/Authentication/Context/UserContext";
+import Account from "./Components/Profile/Account";
 
 
 
@@ -143,6 +144,20 @@ export default function App() {
                 component={Profile}
                 options={{
                   title: "Profile",
+                  headerStyle: {
+                    fontSize: 20,
+                  },
+                  headerTintColor: COLORS.mainColor,
+                  headerTitleStyle: {
+                    fontWeight: "bold",
+                  },
+                }}
+              />
+              <Stack.Screen
+                name="Account"
+                component={Account}
+                options={{
+                  title: "Account Information",
                   headerStyle: {
                     fontSize: 20,
                   },
