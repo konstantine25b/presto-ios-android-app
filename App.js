@@ -25,6 +25,7 @@ import Profile from "./Components/Profile/Profile";
 import { useState } from "react";
 import UserContext from "./Components/Authentication/Context/UserContext";
 import Account from "./Components/Profile/Account";
+import ChangePassword from "./Components/Profile/AccountComponents/ChangePassword";
 
 
 
@@ -157,7 +158,21 @@ export default function App() {
                 name="Account"
                 component={Account}
                 options={{
-                  title: "Account Information",
+                  title: "Account Info",
+                  headerStyle: {
+                    fontSize: 20,
+                  },
+                  headerTintColor: COLORS.mainColor,
+                  headerTitleStyle: {
+                    fontWeight: "bold",
+                  },
+                }}
+              />
+              <Stack.Screen
+                name="ChangePassword"
+                component={ChangePassword}
+                options={{
+                  title: "Edit Password",
                   headerStyle: {
                     fontSize: 20,
                   },

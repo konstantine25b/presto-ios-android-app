@@ -11,11 +11,10 @@ import {
 import COLORS from "../Styles/colors";
 import AccountSection from "./AccountComponents/AccountSection";
 import UserContext from "../Authentication/Context/UserContext";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Account() {
-  const navigateToSection = (str) => {
-    console.log(str);
-  };
+  const navigation = useNavigation();
 
   const context = useContext(UserContext);
   const user = context.user;
@@ -34,7 +33,11 @@ export default function Account() {
           <Text style={styles.greeting}>{userName}</Text>
         </View>
         <View style={styles.emailContainer}>
-          <EnvelopeIcon size={20} color={COLORS.mainColor} style={styles.emailIcon} />
+          <EnvelopeIcon
+            size={20}
+            color={COLORS.mainColor}
+            style={styles.emailIcon}
+          />
           <Text style={styles.email}>{email}</Text>
         </View>
       </View>
@@ -42,22 +45,26 @@ export default function Account() {
       <AccountSection
         Icon={LockClosedIcon}
         Title={"Edit Password"}
-        onPress={() => navigateToSection("Edit Password")}
+        navigation={navigation}
+        pageName={"ChangePassword"}
       />
       <AccountSection
         Icon={PhoneIcon}
         Title={"Edit Phone Number"}
-        onPress={() => navigateToSection("Edit Phone Number")}
+        navigation={navigation}
+        pageName={"ChangePhoneNumber"}
       />
       <AccountSection
         Icon={CreditCardIcon}
         Title={"Payment Methods"}
-        onPress={() => navigateToSection("Payment Methods")}
+        navigation={navigation}
+        pageName={"Payment Methods"}
       />
       <AccountSection
         Icon={ShieldCheckIcon}
         Title={"Manage Privacy"}
-        onPress={() => navigateToSection("Manage Privacy")}
+        navigation={navigation}
+        pageName={"ManagePrivacy"}
       />
     </ScrollView>
   );
@@ -88,7 +95,6 @@ const styles = StyleSheet.create({
   },
   email: {
     fontSize: 16,
-   
   },
   emailContainer: {
     flexDirection: "row",

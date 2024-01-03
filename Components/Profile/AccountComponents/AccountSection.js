@@ -3,7 +3,7 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 import COLORS from "../../Styles/colors";
 
-export default function AccountSection({ Icon, Title, onPress, navigation, pageName }) {
+export default function AccountSection({ Icon, Title, navigation, pageName }) {
   return (
     <Pressable
       style={styles.section}
