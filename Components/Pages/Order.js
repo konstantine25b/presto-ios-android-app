@@ -14,12 +14,7 @@ import COLORS from "../Styles/colors";
 import { API } from "../../Processing/PrestoAPI";
 import EachOrder from "./OrderComponents.js/EachOrder";
 
-const formatTime = (time) => {
-  const minutes = Math.floor(time / 60000);
-  const seconds = Math.floor((time % 60000) / 1000);
 
-  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-};
 const fetchallOrders = async () => {
   const allOrders = await API.getOrders();
   return allOrders;
@@ -152,7 +147,7 @@ export default function Order() {
               cancelingOrder={cancelingOrder}
               navigation={navigation}
               timeRemaining={timeRemaining}
-              formatTime={formatTime}
+             
             />
           ))}
           <View style={styles.paginationButtons}>

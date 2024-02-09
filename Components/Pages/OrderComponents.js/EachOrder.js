@@ -4,12 +4,25 @@ import { useQuery } from "react-query";
 import { API } from "../../../Processing/PrestoAPI";
 import COLORS from "../../Styles/colors";
 
+
+const formatTime = (time) => {
+  const hours = Math.floor(time / 3600000);
+  const minutes = Math.floor((time % 3600000) / 60000);
+  const seconds = Math.floor((time % 60000) / 1000);
+
+  const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+};
+
 const EachOrder = ({
   order,
   cancelingOrder,
   navigation,
   timeRemaining,
-  formatTime,
+  
 }) => {
   if (!order) {
     // Skip null or undefined orders
